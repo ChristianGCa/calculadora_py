@@ -19,4 +19,4 @@ Uma simples calculadora feita em Python utilizando a biblioteca Tkinter para int
 
 ## Screenshot
 
-[Imagem: img/calculadora.png]
+![Calculadora](img/calculadora.png)
