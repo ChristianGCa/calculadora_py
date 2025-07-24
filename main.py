@@ -5,12 +5,13 @@ from tkinter import ttk
 #cores
 cor1 = "#1f1f1f"  # Preta
 cor2 = "#ffffff"  # Branca
-cor3 = "#005180"  # Azul escuro
+cor3 = "#006379"  # Azul escuro
 cor4 = "#3f3f3f"  # Vermelha
-cor5 = "#FF7300"  # Laranja
-cor6 = "#3C6B3C"  # Verde
+cor5 = "#FFD500"  # Amarelo
+cor6 = "#0A8754"  # Verde
 
 fonte_botao = ('Ivy 12 bold')
+fonte_visor = ('Ivy 15 bold')
 
 janela = Tk()
 janela.title("Calculadora")
@@ -25,60 +26,94 @@ frame_tela.grid(row=0, column=0)
 frame_corpo = Frame(janela, width=240, height=290, bg=cor2)
 frame_corpo.grid(row=1, column=0)
 
+todos_valores = ""
+
+# Função para calcular. Cada botão clicado adiciona o valor ao texto do visor
+def entrar_valores(event):
+
+    global todos_valores
+
+    todos_valores = todos_valores + str(event)
+    
+    valor_texto.set(todos_valores)
+
+# Função para calcular
+def calcular():
+    global todos_valores
+    resultado = eval(todos_valores)
+    
+    valor_texto.set(str(resultado))
+
+
+# Função para limpar a tela
+def limpar_tela():
+    global todos_valores
+    todos_valores = ""
+    valor_texto.set("")
+
+
+
+
+# Labels
+valor_texto = StringVar()
+app_label = Label(frame_tela, textvariable=valor_texto, width=15, height=2, padx=59, relief=RAISED, anchor="e", justify="right", font=fonte_visor, bg=cor3, foreground=cor2)
+app_label.place(x=0, y=0)
 
 # Botões
-b_1 = Button(frame_corpo, text="C", width=11, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
+b_1 = Button(frame_corpo, command=limpar_tela, text="C", width=11, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_1.place(x=0, y=0)
 
-b_2 = Button(frame_corpo, text="%", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
+b_2 = Button(frame_corpo, command=lambda: entrar_valores('%'), text="%", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_2.place(x=120, y=0)
 
-b_3 = Button(frame_corpo, text="/", width=4, height=2, bg=cor5, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
+b_3 = Button(frame_corpo, command=lambda: entrar_valores('/'), text="/", width=4, height=2, bg=cor5, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_3.place(x=180, y=0)
 
-b_3 = Button(frame_corpo, text="7", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
+b_3 = Button(frame_corpo, command=lambda: entrar_valores('7'), text="7", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_3.place(x=0, y=58)
 
-b_4 = Button(frame_corpo, text="8", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
+b_4 = Button(frame_corpo, command=lambda: entrar_valores('8'), text="8", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_4.place(x=60, y=58)
 
-b_5 = Button(frame_corpo, text="9", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
+b_5 = Button(frame_corpo, command=lambda: entrar_valores('9'), text="9", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_5.place(x=120, y=58)
 
-b_6 = Button(frame_corpo, text="*", width=4, height=2, bg=cor5, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
+b_6 = Button(frame_corpo, command=lambda: entrar_valores('*'), text="*", width=4, height=2, bg=cor5, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_6.place(x=180, y=58)
 
-b_7 = Button(frame_corpo, text="4", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
+b_7 = Button(frame_corpo, command=lambda: entrar_valores('4'), text="4", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_7.place(x=0, y=116)
 
-b_8 = Button(frame_corpo, text="5", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
+b_8 = Button(frame_corpo, command=lambda: entrar_valores('5'), text="5", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_8.place(x=60, y=116)
 
-b_9 = Button(frame_corpo, text="6", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
+b_9 = Button(frame_corpo, command=lambda: entrar_valores('6'), text="6", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_9.place(x=120, y=116)
 
-b_10 = Button(frame_corpo, text="-", width=4, height=2, bg=cor5, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
+b_10 = Button(frame_corpo, command=lambda: entrar_valores('-'), text="-", width=4, height=2, bg=cor5, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_10.place(x=180, y=116)
 
-b_11 = Button(frame_corpo, text="1", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
+b_11 = Button(frame_corpo, command=lambda: entrar_valores('1'), text="1", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_11.place(x=0, y=174)
 
-b_12 = Button(frame_corpo, text="2", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
+b_12 = Button(frame_corpo, command=lambda: entrar_valores('2'), text="2", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_12.place(x=60, y=174)
 
-b_13 = Button(frame_corpo, text="3", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
+b_13 = Button(frame_corpo, command=lambda: entrar_valores('3'), text="3", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_13.place(x=120, y=174)
 
-b_14 = Button(frame_corpo, text="+", width=4, height=2, bg=cor5, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
+b_14 = Button(frame_corpo, command=lambda: entrar_valores('+'), text="+", width=4, height=2, bg=cor5, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_14.place(x=180, y=174)
 
-b_15 = Button(frame_corpo, text="0", width=11, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
+b_15 = Button(frame_corpo, command=lambda: entrar_valores('0'), text="0", width=11, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_15.place(x=0, y=232)
 
-b_16 = Button(frame_corpo, text=".", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
+b_16 = Button(frame_corpo, command=lambda: entrar_valores('.'), text=".", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_16.place(x=120, y=232)
 
-b_17 = Button(frame_corpo, text="=", width=4, height=2, bg=cor6, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
+b_17 = Button(frame_corpo, command=calcular, text="=", width=4, height=2, bg=cor6, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_17.place(x=180, y=232)
+
+
 
 janela.mainloop()
