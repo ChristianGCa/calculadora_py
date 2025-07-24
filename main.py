@@ -12,6 +12,7 @@ cor6 = "#0A8754"  # Verde
 
 fonte_botao = ('Ivy 12 bold')
 fonte_visor = ('Ivy 15 bold')
+CARACTERES_MAX = 19
 
 janela = Tk()
 janela.title("Calculadora")
@@ -34,15 +35,19 @@ apenas_resultado = False
 def entrar_valores(event):
     global expressao, ultimo_resultado, apenas_resultado
 
+    # Impede que continue digitando se atingir o limite de caracteres
+    if len(expressao) >= CARACTERES_MAX:
+        return
+
     if apenas_resultado:
         if event in ['+', '-', '*', '/', '%']:
             expressao = ultimo_resultado + event
-            apenas_resultado = False
         else:
             expressao = str(event)
         apenas_resultado = False
     else:
-        expressao = expressao + str(event)
+        expressao += str(event)
+
     visor.set(expressao)
 
 # Função para calcular
