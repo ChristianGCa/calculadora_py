@@ -1,7 +1,6 @@
 from tkinter import *
 from tkinter import ttk
 
-
 #cores
 cor1 = "#1f1f1f"  # Preta
 cor2 = "#ffffff"  # Branca
@@ -18,7 +17,6 @@ janela = Tk()
 janela.title("Calculadora")
 janela.geometry("240x350")
 janela.config(bg=cor1)
-
 
 # Frames
 frame_tela = Frame(janela, width=240, height=60, bg=cor3)
@@ -66,7 +64,7 @@ def calcular():
 
 # Função para limpar a tela
 def limpar_tela():
-    global expressao
+    global expressao, apenas_resultado
     expressao = ""
     visor.set("")
     apenas_resultado = False
@@ -81,7 +79,7 @@ app_label.place(x=0, y=0)
 b_1 = Button(frame_corpo, command=limpar_tela, text="C", width=11, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_1.place(x=0, y=0)
 
-b_2 = Button(frame_corpo, command=lambda: entrar_valores('%'), text="%", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
+b_2 = Button(frame_corpo, command=lambda: entrar_valores('%'), text="mod", width=4, height=2, bg=cor2, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
 b_2.place(x=120, y=0)
 
 b_3 = Button(frame_corpo, command=lambda: entrar_valores('/'), text="/", width=4, height=2, bg=cor5, font=fonte_botao, relief=RAISED, overrelief=RIDGE, cursor="hand2")
