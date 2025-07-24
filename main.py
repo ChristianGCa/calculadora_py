@@ -26,37 +26,50 @@ frame_tela.grid(row=0, column=0)
 frame_corpo = Frame(janela, width=240, height=290, bg=cor2)
 frame_corpo.grid(row=1, column=0)
 
-todos_valores = ""
+expressao = ""
+ultimo_resultado = ""
+apenas_resultado = False
 
 # Função para calcular. Cada botão clicado adiciona o valor ao texto do visor
 def entrar_valores(event):
+    global expressao, ultimo_resultado, apenas_resultado
 
-    global todos_valores
-
-    todos_valores = todos_valores + str(event)
-    
-    valor_texto.set(todos_valores)
+    if apenas_resultado:
+        if event in ['+', '-', '*', '/', '%']:
+            expressao = ultimo_resultado + event
+            apenas_resultado = False
+        else:
+            expressao = str(event)
+        apenas_resultado = False
+    else:
+        expressao = expressao + str(event)
+    visor.set(expressao)
 
 # Função para calcular
 def calcular():
-    global todos_valores
-    resultado = eval(todos_valores)
-    
-    valor_texto.set(str(resultado))
+    global expressao, ultimo_resultado, apenas_resultado
+    try:
+        resultado = eval(expressao)
+        visor.set(str(resultado))
+        ultimo_resultado = str(resultado)
+        apenas_resultado = True
+    except Exception:
+        visor.set("Erro")
+        expressao = ""
+        apenas_resultado = False
 
 
 # Função para limpar a tela
 def limpar_tela():
-    global todos_valores
-    todos_valores = ""
-    valor_texto.set("")
-
-
+    global expressao
+    expressao = ""
+    visor.set("")
+    apenas_resultado = False
 
 
 # Labels
-valor_texto = StringVar()
-app_label = Label(frame_tela, textvariable=valor_texto, width=15, height=2, padx=59, relief=RAISED, anchor="e", justify="right", font=fonte_visor, bg=cor3, foreground=cor2)
+visor = StringVar()
+app_label = Label(frame_tela, textvariable=visor, width=15, height=2, padx=59, relief=RAISED, anchor="e", justify="right", font=fonte_visor, bg=cor3, foreground=cor2)
 app_label.place(x=0, y=0)
 
 # Botões
