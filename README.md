@@ -4,7 +4,6 @@ Uma simples calculadora feita em Python utilizando a biblioteca Tkinter para int
 
 ## Funcionalidades
 
-- Interface gráfica amigável
 - Operações básicas: +, -, *, /
 - Operador de módulo (mod) para calcular o resto da divisão
 - Botão de limpar (C)
